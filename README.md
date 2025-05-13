@@ -1,9 +1,12 @@
 # 🐔 Bootstrap Chicken Calculator
 
 The **Bootstrap Chicken Calculator** is a responsive, web-based tool to help poultry farmers or hobbyists calculate key metrics like feed quantity, estimated cost, and weight gain over time. Built using HTML, CSS, JavaScript, and Bootstrap, this lightweight calculator runs entirely in the browser and is mobile-friendly.
+---
 
 # Website Link
  https://raakeshmj.github.io/chicken_calculator/ 
+
+ 
 ---
 
 ## 🚀 Features
