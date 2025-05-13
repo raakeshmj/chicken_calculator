@@ -23,7 +23,7 @@ The **Bootstrap Chicken Calculator** is a responsive, web-based tool to help pou
 - **HTML5**
 - **CSS3**
 - **Bootstrap 5**
-- **JavaScript (Vanilla)**
+- **JavaScript**
 
 ---
 
