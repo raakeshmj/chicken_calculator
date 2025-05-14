@@ -21,28 +21,135 @@
           </div>
           
           <div class="card-body">
-            <p class="lead text-center mb-4">Enter customer order details</p>
+            <!-- Inventory Management Tab System -->
+            <ul class="nav nav-tabs mb-4" id="chickenTabs" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="order-tab" data-bs-toggle="tab" data-bs-target="#order" type="button" role="tab" aria-controls="order" aria-selected="true">
+                  <i class="fas fa-shopping-cart me-2"></i>Order
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="inventory-tab" data-bs-toggle="tab" data-bs-target="#inventory" type="button" role="tab" aria-controls="inventory" aria-selected="false">
+                  <i class="fas fa-warehouse me-2"></i>Inventory
+                </button>
+              </li>
+            </ul>
             
-            <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="legs" min="0" value="0">
-              <label for="legs"><i class="fas fa-bone me-2"></i>Number of Legs</label>
+            <div class="tab-content" id="chickenTabsContent">
+              <!-- Order Form -->
+              <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="order-tab">
+                <p class="lead text-center mb-4">Enter customer order details</p>
+                
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" id="legs" min="0" value="0">
+                  <label for="legs"><i class="fas fa-bone me-2"></i>Number of Legs</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                  <input type="number" class="form-control" id="wings" min="0" value="0">
+                  <label for="wings"><i class="fas fa-feather-alt me-2"></i>Number of Wings</label>
+                </div>
+                
+                <div class="form-floating mb-4">
+                  <input type="number" class="form-control" id="flesh" min="0" value="0">
+                  <label for="flesh"><i class="fas fa-meat me-2"></i>Number of Flesh Portions</label>
+                </div>
+                
+                <button id="calculate-btn" class="btn btn-primary w-100 py-3" onclick="calculate()">
+                  <i class="fas fa-calculator me-2"></i>Calculate
+                </button>
+                
+                <div id="output" class="mt-4 p-3 rounded result-box d-none animate__animated"></div>
+              </div>
+              
+              <!-- Inventory Management -->
+              <div class="tab-pane fade" id="inventory" role="tabpanel" aria-labelledby="inventory-tab">
+                <p class="lead text-center mb-4">Manage Chicken Inventory</p>
+                
+                <div class="row mb-4">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-header bg-light">
+                        <h5 class="mb-0">Current Inventory</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="inventory-display mb-3">
+                          <div class="row">
+                            <div class="col-4 text-center">
+                              <div class="inventory-item">
+                                <i class="fas fa-bone d-block mb-2 fa-2x"></i>
+                                <h3 id="legs-available">0</h3>
+                                <p class="mb-0">Legs</p>
+                              </div>
+                            </div>
+                            <div class="col-4 text-center">
+                              <div class="inventory-item">
+                                <i class="fas fa-feather-alt d-block mb-2 fa-2x"></i>
+                                <h3 id="wings-available">0</h3>
+                                <p class="mb-0">Wings</p>
+                              </div>
+                            </div>
+                            <div class="col-4 text-center">
+                              <div class="inventory-item">
+                                <i class="fas fa-meat d-block mb-2 fa-2x"></i>
+                                <h3 id="flesh-available">0</h3>
+                                <p class="mb-0">Flesh</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="card mb-4">
+                  <div class="card-header bg-light">
+                    <h5 class="mb-0">Add to Inventory</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="add-legs" min="0" value="0">
+                      <label for="add-legs"><i class="fas fa-bone me-2"></i>Add Legs</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="add-wings" min="0" value="0">
+                      <label for="add-wings"><i class="fas fa-feather-alt me-2"></i>Add Wings</label>
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="add-flesh" min="0" value="0">
+                      <label for="add-flesh"><i class="fas fa-meat me-2"></i>Add Flesh</label>
+                    </div>
+                    
+                    <button id="add-inventory-btn" class="btn btn-success w-100 py-2" onclick="addToInventory()">
+                      <i class="fas fa-plus-circle me-2"></i>Add to Inventory
+                    </button>
+                  </div>
+                </div>
+                
+                <div class="card">
+                  <div class="card-header bg-light">
+                    <h5 class="mb-0">Add Whole Chickens</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="form-floating mb-3">
+                      <input type="number" class="form-control" id="add-chickens" min="0" value="0">
+                      <label for="add-chickens"><i class="fas fa-chicken me-2"></i>Number of Whole Chickens</label>
+                    </div>
+                    
+                    <button id="add-chickens-btn" class="btn btn-warning w-100 py-2" onclick="addWholeChickens()">
+                      <i class="fas fa-drumstick-bite me-2"></i>Add Whole Chickens
+                    </button>
+                    
+                    <div class="mt-3 text-muted small">
+                      <p class="mb-0">Each whole chicken adds: 2 legs, 2 wings, and 4 flesh portions</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div class="form-floating mb-3">
-              <input type="number" class="form-control" id="wings" min="0" value="0">
-              <label for="wings"><i class="fas fa-feather-alt me-2"></i>Number of Wings</label>
-            </div>
-            
-            <div class="form-floating mb-4">
-              <input type="number" class="form-control" id="flesh" min="0" value="0">
-              <label for="flesh"><i class="fas fa-meat me-2"></i>Number of Flesh Portions</label>
-            </div>
-            
-            <button id="calculate-btn" class="btn btn-primary w-100 py-3" onclick="calculate()">
-              <i class="fas fa-calculator me-2"></i>Calculate
-            </button>
-            
-            <div id="output" class="mt-4 p-3 rounded result-box d-none animate__animated"></div>
           </div>
           
           <div class="card-footer text-center text-muted">
